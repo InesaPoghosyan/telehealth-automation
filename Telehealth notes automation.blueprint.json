@@ -1,0 +1,430 @@
+{
+    "name": "Telehealth notes automation",
+    "flow": [
+        {
+            "id": 1,
+            "module": "onedrive:watchFilesFolders",
+            "version": 2,
+            "metadata": {
+                "designer": {
+                    "x": -435,
+                    "y": 5,
+                    "messages": [
+                        {
+                            "category": "epochreq",
+                            "severity": "error",
+                            "message": "You must first choose from which point do you want to start processing your emails."
+                        }
+                    ]
+                }
+            }
+        },
+        {
+            "id": 2,
+            "module": "onedrive:downloadAFile",
+            "version": 2,
+            "metadata": {
+                "designer": {
+                    "x": -135,
+                    "y": 5
+                }
+            }
+        },
+        {
+            "id": 3,
+            "module": "regexp:Parser",
+            "version": 1,
+            "metadata": {
+                "designer": {
+                    "x": 165,
+                    "y": 5,
+                    "messages": [
+                        {
+                            "category": "setup",
+                            "severity": "error",
+                            "message": "Pattern: Value must not be empty."
+                        }
+                    ]
+                }
+            }
+        },
+        {
+            "id": 4,
+            "module": "onedrive:searchFilesFolders",
+            "version": 2,
+            "metadata": {
+                "designer": {
+                    "x": 465,
+                    "y": 5,
+                    "messages": [
+                        {
+                            "category": "setupreq",
+                            "severity": "error",
+                            "message": "The module is not set up."
+                        }
+                    ]
+                }
+            }
+        },
+        {
+            "id": 5,
+            "module": "builtin:BasicAggregator",
+            "version": 1,
+            "metadata": {
+                "designer": {
+                    "x": 765,
+                    "y": 5,
+                    "messages": [
+                        {
+                            "category": "setup",
+                            "severity": "error",
+                            "message": "Source Module: Value must not be empty."
+                        },
+                        {
+                            "category": "source",
+                            "severity": "error",
+                            "message": "Source node is not set."
+                        }
+                    ]
+                }
+            }
+        },
+        {
+            "id": 6,
+            "module": "util:SetVariable2",
+            "version": 1,
+            "metadata": {
+                "designer": {
+                    "x": 1065,
+                    "y": 5,
+                    "messages": [
+                        {
+                            "category": "setup",
+                            "severity": "error",
+                            "message": "Variable name: Value must not be empty."
+                        }
+                    ]
+                }
+            }
+        },
+        {
+            "id": 7,
+            "module": "builtin:BasicRouter",
+            "version": 1,
+            "mapper": null,
+            "metadata": {
+                "designer": {
+                    "x": 1365,
+                    "y": 5
+                }
+            },
+            "routes": [
+                {
+                    "flow": [
+                        {
+                            "id": 17,
+                            "module": "openai-gpt-3:CreateTranscription",
+                            "version": 1,
+                            "metadata": {
+                                "designer": {
+                                    "x": 1669,
+                                    "y": -159
+                                }
+                            }
+                        },
+                        {
+                            "id": 18,
+                            "module": "onedrive:uploadAFile",
+                            "version": 2,
+                            "metadata": {
+                                "designer": {
+                                    "x": 1969,
+                                    "y": -163
+                                }
+                            }
+                        },
+                        {
+                            "id": 19,
+                            "module": "openai-gpt-3:CreateCompletion",
+                            "version": 1,
+                            "metadata": {
+                                "designer": {
+                                    "x": 2264,
+                                    "y": -161
+                                }
+                            }
+                        },
+                        {
+                            "id": 20,
+                            "module": "onedrive:searchFilesFolders",
+                            "version": 2,
+                            "metadata": {
+                                "designer": {
+                                    "x": 2564,
+                                    "y": -161
+                                }
+                            }
+                        },
+                        {
+                            "id": 21,
+                            "module": "builtin:BasicAggregator",
+                            "version": 1,
+                            "metadata": {
+                                "designer": {
+                                    "x": 2864,
+                                    "y": -161,
+                                    "messages": [
+                                        {
+                                            "category": "setup",
+                                            "severity": "error",
+                                            "message": "Source Module: Value must not be empty."
+                                        },
+                                        {
+                                            "category": "source",
+                                            "severity": "error",
+                                            "message": "Source node is not set."
+                                        }
+                                    ]
+                                }
+                            }
+                        },
+                        {
+                            "id": 22,
+                            "module": "util:SetVariable2",
+                            "version": 1,
+                            "metadata": {
+                                "designer": {
+                                    "x": 3164,
+                                    "y": -161,
+                                    "messages": [
+                                        {
+                                            "category": "setup",
+                                            "severity": "error",
+                                            "message": "Variable name: Value must not be empty."
+                                        }
+                                    ]
+                                }
+                            }
+                        },
+                        {
+                            "id": 23,
+                            "module": "builtin:BasicRouter",
+                            "version": 1,
+                            "mapper": null,
+                            "metadata": {
+                                "designer": {
+                                    "x": 3464,
+                                    "y": -161
+                                }
+                            },
+                            "routes": [
+                                {
+                                    "flow": [
+                                        {
+                                            "id": 24,
+                                            "module": "onedrive:downloadAFile",
+                                            "version": 2,
+                                            "metadata": {
+                                                "designer": {
+                                                    "x": 3768,
+                                                    "y": -160,
+                                                    "messages": [
+                                                        {
+                                                            "category": "setupreq",
+                                                            "severity": "error",
+                                                            "message": "The module is not set up."
+                                                        }
+                                                    ]
+                                                }
+                                            }
+                                        },
+                                        {
+                                            "id": 26,
+                                            "module": "util:ComposeTransformer",
+                                            "version": 1,
+                                            "metadata": {
+                                                "designer": {
+                                                    "x": 4052,
+                                                    "y": -162
+                                                }
+                                            }
+                                        },
+                                        {
+                                            "id": 27,
+                                            "module": "onedrive:uploadAFile",
+                                            "version": 2,
+                                            "metadata": {
+                                                "designer": {
+                                                    "x": 4352,
+                                                    "y": -162
+                                                }
+                                            }
+                                        }
+                                    ]
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "flow": [
+                        {
+                            "id": 9,
+                            "module": "onedrive:createAFolder",
+                            "version": 2,
+                            "metadata": {
+                                "designer": {
+                                    "x": 1665,
+                                    "y": 155,
+                                    "messages": [
+                                        {
+                                            "category": "setup",
+                                            "severity": "error",
+                                            "message": "New Folder Name: Value must not be empty."
+                                        }
+                                    ]
+                                }
+                            }
+                        },
+                        {
+                            "id": 10,
+                            "module": "onedrive:uploadAFile",
+                            "version": 2,
+                            "metadata": {
+                                "designer": {
+                                    "x": 1965,
+                                    "y": 155,
+                                    "messages": [
+                                        {
+                                            "category": "setup",
+                                            "severity": "error",
+                                            "message": "File Name: Value must not be empty."
+                                        },
+                                        {
+                                            "category": "setup",
+                                            "severity": "error",
+                                            "message": "Data: Value must not be empty."
+                                        }
+                                    ]
+                                }
+                            }
+                        },
+                        {
+                            "id": 11,
+                            "module": "openai-gpt-3:CreateTranscription",
+                            "version": 1,
+                            "metadata": {
+                                "designer": {
+                                    "x": 2265,
+                                    "y": 155
+                                }
+                            }
+                        },
+                        {
+                            "id": 12,
+                            "module": "onedrive:uploadAFile",
+                            "version": 2,
+                            "metadata": {
+                                "designer": {
+                                    "x": 2565,
+                                    "y": 155,
+                                    "messages": [
+                                        {
+                                            "category": "setup",
+                                            "severity": "error",
+                                            "message": "File Name: Value must not be empty."
+                                        },
+                                        {
+                                            "category": "setup",
+                                            "severity": "error",
+                                            "message": "Data: Value must not be empty."
+                                        }
+                                    ]
+                                }
+                            }
+                        },
+                        {
+                            "id": 13,
+                            "module": "onedrive:downloadAFile",
+                            "version": 2,
+                            "metadata": {
+                                "designer": {
+                                    "x": 2865,
+                                    "y": 155
+                                }
+                            }
+                        },
+                        {
+                            "id": 14,
+                            "module": "openai-gpt-3:CreateCompletion",
+                            "version": 1,
+                            "metadata": {
+                                "designer": {
+                                    "x": 3165,
+                                    "y": 155,
+                                    "messages": [
+                                        {
+                                            "category": "setupreq",
+                                            "severity": "error",
+                                            "message": "The module is not set up."
+                                        }
+                                    ]
+                                }
+                            }
+                        },
+                        {
+                            "id": 15,
+                            "module": "util:ComposeTransformer",
+                            "version": 1,
+                            "metadata": {
+                                "designer": {
+                                    "x": 3465,
+                                    "y": 155
+                                }
+                            }
+                        },
+                        {
+                            "id": 16,
+                            "module": "onedrive:uploadAFile",
+                            "version": 2,
+                            "metadata": {
+                                "designer": {
+                                    "x": 3765,
+                                    "y": 155,
+                                    "messages": [
+                                        {
+                                            "category": "setupreq",
+                                            "severity": "error",
+                                            "message": "The module is not set up."
+                                        }
+                                    ]
+                                }
+                            }
+                        }
+                    ]
+                }
+            ]
+        }
+    ],
+    "metadata": {
+        "instant": false,
+        "version": 1,
+        "scenario": {
+            "roundtrips": 1,
+            "maxErrors": 3,
+            "autoCommit": true,
+            "autoCommitTriggerLast": true,
+            "sequential": false,
+            "slots": null,
+            "confidential": false,
+            "dataloss": false,
+            "dlq": false,
+            "freshVariables": false
+        },
+        "designer": {
+            "orphans": []
+        },
+        "zone": "eu1.make.com",
+        "notes": []
+    }
+}

@@ -1,5 +1,9 @@
 # 🏥 Telehealth Note Automation
 
+
+<img width="1781" height="356" alt="image" src="https://github.com/user-attachments/assets/30edc3a8-5303-4f03-b43e-4afb60f865f6" />
+
+
 Automatically transcribe therapy sessions and generate structured clinical progress notes — hands-free.
 
 What This Does
